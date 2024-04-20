@@ -11,3 +11,6 @@ require('lspconfig')['pyright'].setup {
 require('lspconfig')['tailwindcss'].setup {
 	capabilities = capabilities
 }
+require('lspconfig')['tsserver'].setup {
+	capabilities = capabilities
+}

@@ -16,11 +16,12 @@ require("lazy").setup({
 		}
 	},
 	{
-		"Alexis12119/nightly.nvim",
+		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
+		opts = {},
 		config = function()
-			vim.cmd.colorscheme "nightly"
+			vim.cmd[[colorscheme tokyonight]]
 		end,
 	},
 	{
@@ -84,20 +85,44 @@ require("lazy").setup({
 	},
 	{
 		'rcarriga/nvim-notify'
-	}
+	},
+	{
+		'stevearc/conform.nvim',
+		opts = {},
+	},
 
 })
 
 
-require("mason").setup()
+require("mason").setup({
+	ensure_installed = {
+		"stylua",
+		"isort",
+		"black",
+		"prettierd",
+		"prettier",
+		"curlylint"
+	}
+})
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "rust_analyzer", "pyright", "emmet_language_server", "tailwindcss" },
+	ensure_installed = { 
+		"lua_ls", 
+		"rust_analyzer", 
+		"pyright", 
+		"emmet_language_server", 
+		"tailwindcss", 
+		"tsserver" 
+	},
 })
 -- setup lsps
 require("lspconfig").lua_ls.setup {}
 require("lspconfig").rust_analyzer.setup {}
 require("lspconfig").pyright.setup {}
 require("lspconfig").tailwindcss.setup {}
+require("lspconfig").tsserver.setup {}
+
+-- additional plugins
 require("plugins.git")
 require("plugins.emmet")
 require("notify")("Hello, Emmanuel. Happy coding!")
+require("lint")
