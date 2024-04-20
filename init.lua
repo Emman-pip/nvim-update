@@ -1,7 +1,7 @@
 -- greetings here
 vim.cmd("echo 'hello, Emmanuel'")
 
--- options 
+-- options
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.number = true

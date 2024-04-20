@@ -39,9 +39,12 @@ require("lazy").setup({
 	{
 		-- alpha
 		'goolord/alpha-nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		dependencies = {
+			'nvim-tree/nvim-web-devicons'
+		},
 		config = function()
-			require 'alpha'.setup(require 'alpha.themes.startify'.config)
+			-- require 'alpha'.setup(require 'alpha.themes.startify'.config)
+			require("plugins.alpha-config")
 		end
 	},
 	{
@@ -112,7 +115,13 @@ require("lazy").setup({
 		opts = {},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-	}
+	},
+	{
+		"MaximilianLloyd/ascii.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim"
+		}
+	},
 	-- last
 
 })
