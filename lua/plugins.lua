@@ -1,5 +1,3 @@
--- greetings here
-vim.cmd("echo 'hello, Emmanuel'")
 -- require lazy
 require("plugins.lazy_setup")
 
@@ -18,11 +16,11 @@ require("lazy").setup({
 		}
 	},
 	{
-		"dasupradyumna/midnight.nvim", 
-		lazy = false, 
+		"Alexis12119/nightly.nvim",
+		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme("midnight")
+			vim.cmd.colorscheme "nightly"
 		end,
 	},
 	{
@@ -38,9 +36,11 @@ require("lazy").setup({
 		config = true,
 	},
 	{
+		-- alpha
 		'goolord/alpha-nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function ()
-			require'alpha'.setup(require'alpha.themes.dashboard'.config)
+			require'alpha'.setup(require'alpha.themes.startify'.config)
 		end
 	},
 	{
@@ -85,13 +85,16 @@ require("lazy").setup({
 
 })
 
+
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "rust_analyzer", "pyright", "emmet_language_server" },
+	ensure_installed = { "lua_ls", "rust_analyzer", "pyright", "emmet_language_server", "tailwindcss" },
 })
 -- setup lsps
 require("lspconfig").lua_ls.setup {}
 require("lspconfig").rust_analyzer.setup {}
 require("lspconfig").pyright.setup {}
+require("lspconfig").tailwindcss.setup {}
 require("plugins.git")
 require("plugins.emmet")
+
