@@ -82,6 +82,9 @@ require("lazy").setup({
 	{
 		"lewis6991/gitsigns.nvim",
 	},
+	{
+		'rcarriga/nvim-notify'
+	}
 
 })
 
@@ -97,4 +100,4 @@ require("lspconfig").pyright.setup {}
 require("lspconfig").tailwindcss.setup {}
 require("plugins.git")
 require("plugins.emmet")
-
+require("notify")("Hello, Emmanuel. Happy coding!")
