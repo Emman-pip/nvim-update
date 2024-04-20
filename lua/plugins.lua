@@ -105,13 +105,13 @@ require("mason").setup({
 	}
 })
 require("mason-lspconfig").setup({
-	ensure_installed = { 
-		"lua_ls", 
-		"rust_analyzer", 
-		"pyright", 
-		"emmet_language_server", 
-		"tailwindcss", 
-		"tsserver" 
+	ensure_installed = {
+		"lua_ls",
+		"rust_analyzer",
+		"pyright",
+		"emmet_language_server",
+		"tailwindcss",
+		"tsserver"
 	},
 })
 -- setup lsps
