@@ -21,11 +21,11 @@ require("lazy").setup({
 		priority = 1000,
 		opts = {},
 		config = function()
-			vim.cmd[[colorscheme tokyonight]]
+			vim.cmd [[colorscheme tokyonight]]
 		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter', 
+		'nvim-treesitter/nvim-treesitter',
 		config = function()
 			require("plugins.ts_setup")
 		end,
@@ -40,8 +40,8 @@ require("lazy").setup({
 		-- alpha
 		'goolord/alpha-nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
-		config = function ()
-			require'alpha'.setup(require'alpha.themes.startify'.config)
+		config = function()
+			require 'alpha'.setup(require 'alpha.themes.startify'.config)
 		end
 	},
 	{
@@ -55,11 +55,11 @@ require("lazy").setup({
 	{
 
 		'neovim/nvim-lspconfig',
-		'hrsh7th/cmp-nvim-lsp' ,
-		'hrsh7th/cmp-buffer'   ,
-		'hrsh7th/cmp-path'     ,
-		'hrsh7th/cmp-cmdline'  ,
-		'hrsh7th/nvim-cmp'     ,
+		'hrsh7th/cmp-nvim-lsp',
+		'hrsh7th/cmp-buffer',
+		'hrsh7th/cmp-path',
+		'hrsh7th/cmp-cmdline',
+		'hrsh7th/nvim-cmp',
 	},
 	{
 		'L3MON4D3/LuaSnip',
@@ -77,7 +77,8 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 	},
 	{
-		'nvim-telescope/telescope.nvim', tag = '0.1.6',
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.6',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 	{
@@ -90,6 +91,29 @@ require("lazy").setup({
 		'stevearc/conform.nvim',
 		opts = {},
 	},
+	-- lazy.nvim
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		}
+	},
+	{
+		'stevearc/oil.nvim',
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	}
+	-- last
 
 })
 
@@ -114,6 +138,7 @@ require("mason-lspconfig").setup({
 		"tsserver"
 	},
 })
+
 -- setup lsps
 require("lspconfig").lua_ls.setup {}
 require("lspconfig").rust_analyzer.setup {}
@@ -126,3 +151,5 @@ require("plugins.git")
 require("plugins.emmet")
 require("notify")("Hello, Emmanuel. Happy coding!")
 require("lint")
+require("plugins.noice_setup")
+require("plugins.oil")
