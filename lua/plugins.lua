@@ -79,9 +79,13 @@ require("lazy").setup({
 		'nvim-telescope/telescope.nvim', tag = '0.1.6',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
+	{
+		"lewis6991/gitsigns.nvim",
+	},
 
 })
 
+require("plugins.git")
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = { "lua_ls", "rust_analyzer" },
