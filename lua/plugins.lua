@@ -13,7 +13,7 @@ require("lazy").setup({
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
-		}
+		},
 	},
 	{
 		"folke/tokyonight.nvim",
@@ -21,11 +21,11 @@ require("lazy").setup({
 		priority = 1000,
 		opts = {},
 		config = function()
-			vim.cmd [[colorscheme tokyonight]]
+			vim.cmd([[colorscheme tokyonight]])
 		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter',
+		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("plugins.ts_setup")
 		end,
@@ -38,36 +38,36 @@ require("lazy").setup({
 	},
 	{
 		-- alpha
-		'goolord/alpha-nvim',
+		"goolord/alpha-nvim",
 		dependencies = {
-			'nvim-tree/nvim-web-devicons'
+			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
 			-- require 'alpha'.setup(require 'alpha.themes.startify'.config)
 			require("plugins.alpha-config")
-		end
+		end,
 	},
 	{
 		-- lualine
-		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require('lualine').setup()
+			require("lualine").setup()
 		end,
 	},
 	{
 
-		'neovim/nvim-lspconfig',
-		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/cmp-buffer',
-		'hrsh7th/cmp-path',
-		'hrsh7th/cmp-cmdline',
-		'hrsh7th/nvim-cmp',
+		"neovim/nvim-lspconfig",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/nvim-cmp",
 	},
 	{
-		'L3MON4D3/LuaSnip',
+		"L3MON4D3/LuaSnip",
 		dependencies = {
-			'saadparwaiz1/cmp_luasnip',
+			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 		},
 		config = function()
@@ -80,18 +80,18 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 	},
 	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.6',
-		dependencies = { 'nvim-lua/plenary.nvim' }
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.6",
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"lewis6991/gitsigns.nvim",
 	},
 	{
-		'rcarriga/nvim-notify'
+		"rcarriga/nvim-notify",
 	},
 	{
-		'stevearc/conform.nvim',
+		"stevearc/conform.nvim",
 		opts = {},
 	},
 	-- lazy.nvim
@@ -108,10 +108,10 @@ require("lazy").setup({
 			--   `nvim-notify` is only needed, if you want to use the notification view.
 			--   If not available, we use `mini` as the fallback
 			"rcarriga/nvim-notify",
-		}
+		},
 	},
 	{
-		'stevearc/oil.nvim',
+		"stevearc/oil.nvim",
 		opts = {},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -119,13 +119,11 @@ require("lazy").setup({
 	{
 		"MaximilianLloyd/ascii.nvim",
 		dependencies = {
-			"MunifTanjim/nui.nvim"
-		}
+			"MunifTanjim/nui.nvim",
+		},
 	},
 	-- last
-
 })
-
 
 require("mason").setup({
 	ensure_installed = {
@@ -134,8 +132,8 @@ require("mason").setup({
 		"black",
 		"prettierd",
 		"prettier",
-		"curlylint"
-	}
+		"curlylint",
+	},
 })
 require("mason-lspconfig").setup({
 	ensure_installed = {
@@ -144,16 +142,18 @@ require("mason-lspconfig").setup({
 		"pyright",
 		"emmet_language_server",
 		"tailwindcss",
-		"tsserver"
+		"tsserver",
+		"clangd",
 	},
 })
 
 -- setup lsps
-require("lspconfig").lua_ls.setup {}
-require("lspconfig").rust_analyzer.setup {}
-require("lspconfig").pyright.setup {}
-require("lspconfig").tailwindcss.setup {}
-require("lspconfig").tsserver.setup {}
+require("lspconfig").lua_ls.setup({})
+require("lspconfig").rust_analyzer.setup({})
+require("lspconfig").pyright.setup({})
+require("lspconfig").tailwindcss.setup({})
+require("lspconfig").tsserver.setup({})
+require("lspconfig").clangd.setup({})
 
 -- additional plugins
 require("plugins.git")
