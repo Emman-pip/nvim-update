@@ -16,7 +16,7 @@ vim.opt.termguicolors = true
 vim.opt.hlsearch = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
-vim.opt.shell = "powershell.exe"
+-- vim.opt.shell = "powershell.exe"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
