@@ -52,7 +52,18 @@ require("lazy").setup({
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
-			require('lualine').setup()
+			require('lualine').setup({
+
+				tabline = {
+					lualine_a = { 'mode' },
+					lualine_b = { 'buffers' },
+					lualine_c = {},
+					lualine_x = { 'encodeing', 'filename', 'filetype', 'fileformat', 'progress' },
+					lualine_y = { 'progress ' },
+					lualine_z = { 'location' }
+				},
+				sections = {}
+			})
 		end,
 	},
 	{
@@ -121,6 +132,23 @@ require("lazy").setup({
 		dependencies = {
 			"MunifTanjim/nui.nvim"
 		}
+	},
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+		},
+		keys = {
+			{ "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+		},
 	},
 	-- last
 
