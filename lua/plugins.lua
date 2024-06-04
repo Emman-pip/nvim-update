@@ -58,7 +58,7 @@ require("lazy").setup({
 					lualine_a = { 'mode' },
 					lualine_b = { 'buffers' },
 					lualine_c = {},
-					lualine_x = { 'encodeing', 'filename', 'filetype', 'fileformat', 'progress' },
+					lualine_x = { 'encoding', 'filename', 'filetype', 'fileformat', 'progress' },
 					lualine_y = { 'progress ' },
 					lualine_z = { 'location' }
 				},
@@ -98,29 +98,29 @@ require("lazy").setup({
 	{
 		"lewis6991/gitsigns.nvim",
 	},
-	{
-		'rcarriga/nvim-notify'
-	},
+	-- {
+	-- 	'rcarriga/nvim-notify'
+	-- },
 	{
 		'stevearc/conform.nvim',
 		opts = {},
 	},
 	-- lazy.nvim
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
-		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			"rcarriga/nvim-notify",
-		}
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		-- add any options here
+	-- 	},
+	-- 	dependencies = {
+	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		-- OPTIONAL:
+	-- 		--   `nvim-notify` is only needed, if you want to use the notification view.
+	-- 		--   If not available, we use `mini` as the fallback
+	-- 		"rcarriga/nvim-notify",
+	-- 	}
+	-- },
 	{
 		'stevearc/oil.nvim',
 		opts = {},
@@ -186,7 +186,8 @@ require("lspconfig").tsserver.setup {}
 -- additional plugins
 require("plugins.git")
 require("plugins.emmet")
-require("notify")("Hello, Emmanuel. Happy coding!")
 require("lint")
-require("plugins.noice_setup")
+-- DISABLE pretty sht
+-- require("plugins.noice_setup")
+-- require("notify")("Hello, Emmanuel. Happy coding!")
 require("plugins.oil")

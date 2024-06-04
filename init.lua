@@ -1,6 +1,3 @@
--- greetings here
-vim.cmd("echo 'hello, Emmanuel'")
-
 -- options
 vim.opt.splitbelow = true
 vim.opt.splitright = true
