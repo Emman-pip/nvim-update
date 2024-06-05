@@ -25,7 +25,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter',
+		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("plugins.ts_setup")
 		end,
@@ -38,29 +38,29 @@ require("lazy").setup({
 	},
 	{
 		-- alpha
-		'goolord/alpha-nvim',
+		"goolord/alpha-nvim",
 		dependencies = {
-			'nvim-tree/nvim-web-devicons'
+			"nvim-tree/nvim-web-devicons"
 		},
 		config = function()
-			-- require 'alpha'.setup(require 'alpha.themes.startify'.config)
+			-- require "alpha".setup(require "alpha.themes.startify".config)
 			require("plugins.alpha-config")
 		end
 	},
 	{
 		-- lualine
-		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require('lualine').setup({
+			require("lualine").setup({
 
 				tabline = {
-					lualine_a = { 'mode' },
-					lualine_b = { 'buffers' },
+					lualine_a = { "mode" },
+					lualine_b = { "buffers" },
 					lualine_c = {},
-					lualine_x = { 'encoding', 'filename', 'filetype', 'fileformat', 'progress' },
-					lualine_y = { 'progress ' },
-					lualine_z = { 'location' }
+					lualine_x = { "encoding", "filename", "filetype", "fileformat", "progress" },
+					lualine_y = { "progress " },
+					lualine_z = { "location" }
 				},
 				sections = {}
 			})
@@ -68,17 +68,17 @@ require("lazy").setup({
 	},
 	{
 
-		'neovim/nvim-lspconfig',
-		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/cmp-buffer',
-		'hrsh7th/cmp-path',
-		'hrsh7th/cmp-cmdline',
-		'hrsh7th/nvim-cmp',
+		"neovim/nvim-lspconfig",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/nvim-cmp",
 	},
 	{
-		'L3MON4D3/LuaSnip',
+		"L3MON4D3/LuaSnip",
 		dependencies = {
-			'saadparwaiz1/cmp_luasnip',
+			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 		},
 		config = function()
@@ -91,18 +91,18 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 	},
 	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.6',
-		dependencies = { 'nvim-lua/plenary.nvim' }
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.6",
+		dependencies = { "nvim-lua/plenary.nvim" }
 	},
 	{
 		"lewis6991/gitsigns.nvim",
 	},
 	-- {
-	-- 	'rcarriga/nvim-notify'
+	-- 	"rcarriga/nvim-notify"
 	-- },
 	{
-		'stevearc/conform.nvim',
+		"stevearc/conform.nvim",
 		opts = {},
 	},
 	-- lazy.nvim
@@ -122,7 +122,7 @@ require("lazy").setup({
 	-- 	}
 	-- },
 	{
-		'stevearc/oil.nvim',
+		"stevearc/oil.nvim",
 		opts = {},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -149,6 +149,28 @@ require("lazy").setup({
 			{ "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
+	},
+	{
+		"nvim-java/nvim-java",
+		dependencies = {
+			"nvim-java/lua-async-await",
+			"nvim-java/nvim-java-refactor",
+			"nvim-java/nvim-java-core",
+			"nvim-java/nvim-java-test",
+			"nvim-java/nvim-java-dap",
+			"MunifTanjim/nui.nvim",
+			"neovim/nvim-lspconfig",
+			"mfussenegger/nvim-dap",
+			{
+				"williamboman/mason.nvim",
+				opts = {
+					registries = {
+						"github:nvim-java/mason-registry",
+						"github:mason-org/mason-registry",
+					},
+				},
+			}
+		}
 	},
 	-- last
 
@@ -179,12 +201,20 @@ require("mason-lspconfig").setup({
 })
 
 -- setup lsps
+require('java').setup()
+require('lspconfig').jdtls.setup({})
 require("lspconfig").lua_ls.setup {}
 require("lspconfig").rust_analyzer.setup {}
 require("lspconfig").pyright.setup {}
 require("lspconfig").tailwindcss.setup {}
 require("lspconfig").tsserver.setup {}
 require("lspconfig").clangd.setup {}
+
+-- java
+local config = {
+	cmd = { "/usr/bin/jdtls" },
+	root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+}
 
 -- additional plugins
 require("plugins.git")
