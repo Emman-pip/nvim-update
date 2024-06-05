@@ -162,7 +162,8 @@ require("mason").setup({
 		"black",
 		"prettierd",
 		"prettier",
-		"curlylint"
+		"curlylint",
+		"clang-format",
 	}
 })
 require("mason-lspconfig").setup({
@@ -172,7 +173,8 @@ require("mason-lspconfig").setup({
 		"pyright",
 		"emmet_language_server",
 		"tailwindcss",
-		"tsserver"
+		"tsserver",
+		"clangd",
 	},
 })
 
@@ -182,6 +184,7 @@ require("lspconfig").rust_analyzer.setup {}
 require("lspconfig").pyright.setup {}
 require("lspconfig").tailwindcss.setup {}
 require("lspconfig").tsserver.setup {}
+require("lspconfig").clangd.setup {}
 
 -- additional plugins
 require("plugins.git")

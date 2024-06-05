@@ -14,3 +14,6 @@ require('lspconfig')['tailwindcss'].setup {
 require('lspconfig')['tsserver'].setup {
 	capabilities = capabilities
 }
+require('lspconfig')['clangd'].setup {
+	capabilities = capabilities
+}
