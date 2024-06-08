@@ -203,18 +203,14 @@ require("mason-lspconfig").setup({
 -- setup lsps
 require('java').setup()
 require('lspconfig').jdtls.setup({})
+--------------------------------------
 require("lspconfig").lua_ls.setup {}
 require("lspconfig").rust_analyzer.setup {}
 require("lspconfig").pyright.setup {}
 require("lspconfig").tailwindcss.setup {}
 require("lspconfig").tsserver.setup {}
 require("lspconfig").clangd.setup {}
-
--- java
-local config = {
-	cmd = { "/usr/bin/jdtls" },
-	root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
-}
+require("lspconfig").cssls.setup {}
 
 -- additional plugins
 require("plugins.git")
@@ -224,3 +220,11 @@ require("lint")
 -- require("plugins.noice_setup")
 -- require("notify")("Hello, Emmanuel. Happy coding!")
 require("plugins.oil")
+-- cssls
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require 'lspconfig'.cssls.setup {
+	capabilities = capabilities,
+}
+require("plugins.cmp_setup")

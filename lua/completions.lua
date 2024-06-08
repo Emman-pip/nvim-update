@@ -1,5 +1,4 @@
-require("plugins.cmp_setup")
-
+--Enable (broadcasting) snippet capability for completion
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require('lspconfig')['lua_ls'].setup {
@@ -8,6 +7,9 @@ require('lspconfig')['lua_ls'].setup {
 require('lspconfig')['pyright'].setup {
 	capabilities = capabilities
 }
+-- require('lspconfig')['cssls'].setup {
+-- 	capabilities = capabilities
+-- }
 require('lspconfig')['tailwindcss'].setup {
 	capabilities = capabilities
 }

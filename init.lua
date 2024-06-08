@@ -7,13 +7,14 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.wrap = false
 vim.opt.scrolloff = 999
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.hlsearch = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.virtualedit = "block"
+vim.opt.backupcopy = "yes"
 -- vim.opt.shell = "powershell.exe"
 
 vim.g.mapleader = " "
