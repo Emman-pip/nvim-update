@@ -19,3 +19,9 @@ require('lspconfig')['tsserver'].setup {
 require('lspconfig')['clangd'].setup {
 	capabilities = capabilities
 }
+-- require('lspconfig')['bashls'].setup {
+-- 	capabilities = capabilities
+-- }
+-- require('lspconfig')['phpactor'].setup {
+-- 	capabilities = capabilities
+-- }

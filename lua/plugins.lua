@@ -1,7 +1,41 @@
 -- require lazy
+
 require("plugins.lazy_setup")
 
+--lsp-zero
 require("lazy").setup({
+	-- php
+	-- {
+	-- 	'VonHeikemen/lsp-zero.nvim',
+	-- 	dependencies = {
+	-- 		'neovim/nvim-lspconfig',
+	-- 		'hrsh7th/cmp-nvim-lsp',
+	-- 		'hrsh7th/nvim-cmp',
+	-- 		'L3MON4D3/LuaSnip',
+	-- 	},
+	-- 	branch = 'v3.x',
+	-- 	config = function()
+	-- 		local lsp_zero = require('lsp-zero')
+
+	-- 		lsp_zero.on_attach(function(client, bufnr)
+	-- 			-- see :help lsp-zero-keybindings
+	-- 			-- to learn the available actions
+	-- 			lsp_zero.default_keymaps({ buffer = bufnr })
+	-- 		end)
+
+	-- 		-- to learn how to use mason.nvim
+	-- 		-- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
+	-- 		require('mason').setup({})
+	-- 		require('mason-lspconfig').setup({
+	-- 			ensure_installed = {},
+	-- 			handlers = {
+	-- 				function(server_name)
+	-- 					require('lspconfig')[server_name].setup({})
+	-- 				end,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -188,6 +222,8 @@ require("mason").setup({
 		"clang-format",
 	}
 })
+
+vim.g.lsp_zero_extend_lspconfig = 0
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"lua_ls",
@@ -197,6 +233,31 @@ require("mason-lspconfig").setup({
 		"tailwindcss",
 		"tsserver",
 		"clangd",
+		"bashls",
+		-- php
+	},
+	handlers = {
+		--- this first function is the "default handler"
+		--- it applies to every language server without a "custom handler"
+		function(server_name)
+			require('lspconfig')[server_name].setup({})
+		end,
+
+		--- this is the "custom handler" for `example_server`
+		--- in your own config you should replace `example_server`
+		--- with the name of a language server you have installed
+		example_server = function()
+			--- in this function you can setup
+			--- the language server however you want.
+			--- in this example we just use lspconfig
+
+			require('lspconfig').example_server.setup({
+				---
+				-- in here you can add your own
+				-- custom configuration
+				---
+			})
+		end,
 	},
 })
 
@@ -205,21 +266,28 @@ require('java').setup()
 require('lspconfig').jdtls.setup({})
 --------------------------------------
 require("lspconfig").lua_ls.setup {}
+--------------------------------------
 require("lspconfig").rust_analyzer.setup {}
+--------------------------------------
 require("lspconfig").pyright.setup {}
+--------------------------------------
 require("lspconfig").tailwindcss.setup {}
 require("lspconfig").tsserver.setup {}
-require("lspconfig").clangd.setup {}
 require("lspconfig").cssls.setup {}
-
+--------------------------------------
+require("lspconfig").clangd.setup {}
+--------------------------------------
 -- additional plugins
 require("plugins.git")
 require("plugins.emmet")
 require("lint")
+--------------------------------------
 -- DISABLE pretty sht
 -- require("plugins.noice_setup")
 -- require("notify")("Hello, Emmanuel. Happy coding!")
 require("plugins.oil")
+--------------------------------------
+
 -- cssls
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -228,3 +296,28 @@ require 'lspconfig'.cssls.setup {
 	capabilities = capabilities,
 }
 require("plugins.cmp_setup")
+
+-- bashls
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'sh',
+	callback = function()
+		vim.lsp.start({
+			name = 'bash-language-server',
+			cmd = { 'bash-language-server', 'start' },
+		})
+	end,
+})
+
+
+-- lsp_zero.on_attach(function(client, bufnr)
+-- 	lsp_zero.default_keymaps({ buffer = bufnr })
+-- end)
+--
+-- lsp_zero.on_attach(function(client, bufnr)
+-- 	-- see :help lsp-zero-keybindings
+-- 	-- to learn the available actions
+-- 	lsp_zero.default_keymaps({ buffer = bufnr })
+-- end)
+
+-- to learn how to use mason.nvim
+-- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
