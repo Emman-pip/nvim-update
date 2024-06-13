@@ -2,40 +2,29 @@
 
 require("plugins.lazy_setup")
 
---lsp-zero
 require("lazy").setup({
-	-- php
-	-- {
-	-- 	'VonHeikemen/lsp-zero.nvim',
-	-- 	dependencies = {
-	-- 		'neovim/nvim-lspconfig',
-	-- 		'hrsh7th/cmp-nvim-lsp',
-	-- 		'hrsh7th/nvim-cmp',
-	-- 		'L3MON4D3/LuaSnip',
-	-- 	},
-	-- 	branch = 'v3.x',
-	-- 	config = function()
-	-- 		local lsp_zero = require('lsp-zero')
-
-	-- 		lsp_zero.on_attach(function(client, bufnr)
-	-- 			-- see :help lsp-zero-keybindings
-	-- 			-- to learn the available actions
-	-- 			lsp_zero.default_keymaps({ buffer = bufnr })
-	-- 		end)
-
-	-- 		-- to learn how to use mason.nvim
-	-- 		-- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
-	-- 		require('mason').setup({})
-	-- 		require('mason-lspconfig').setup({
-	-- 			ensure_installed = {},
-	-- 			handlers = {
-	-- 				function(server_name)
-	-- 					require('lspconfig')[server_name].setup({})
-	-- 				end,
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+	{ -- optional completion source for require statements and module annotations
+		"hrsh7th/nvim-cmp",
+		opts = function(_, opts)
+			opts.sources = opts.sources or {}
+			table.insert(opts.sources, {
+				name = "lazydev",
+				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+			})
+		end,
+	},
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -43,11 +32,7 @@ require("lazy").setup({
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 		end,
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		}
+		opts = {},
 	},
 	{
 		"folke/tokyonight.nvim",
@@ -55,7 +40,7 @@ require("lazy").setup({
 		priority = 1000,
 		opts = {},
 		config = function()
-			vim.cmd [[colorscheme tokyonight]]
+			vim.cmd([[colorscheme tokyonight]])
 		end,
 	},
 	{
@@ -74,12 +59,12 @@ require("lazy").setup({
 		-- alpha
 		"goolord/alpha-nvim",
 		dependencies = {
-			"nvim-tree/nvim-web-devicons"
+			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
 			-- require "alpha".setup(require "alpha.themes.startify".config)
 			require("plugins.alpha-config")
-		end
+		end,
 	},
 	{
 		-- lualine
@@ -94,9 +79,9 @@ require("lazy").setup({
 					lualine_c = {},
 					lualine_x = { "encoding", "filename", "filetype", "fileformat", "progress" },
 					lualine_y = { "progress " },
-					lualine_z = { "location" }
+					lualine_z = { "location" },
 				},
-				sections = {}
+				sections = {},
 			})
 		end,
 	},
@@ -116,7 +101,7 @@ require("lazy").setup({
 			"rafamadriz/friendly-snippets",
 		},
 		config = function()
-			require("completions")
+			-- require("completions")
 		end,
 	},
 	{
@@ -127,7 +112,7 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.6",
-		dependencies = { "nvim-lua/plenary.nvim" }
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -164,8 +149,8 @@ require("lazy").setup({
 	{
 		"MaximilianLloyd/ascii.nvim",
 		dependencies = {
-			"MunifTanjim/nui.nvim"
-		}
+			"MunifTanjim/nui.nvim",
+		},
 	},
 	{
 		"christoomey/vim-tmux-navigator",
@@ -177,10 +162,10 @@ require("lazy").setup({
 			"TmuxNavigatePrevious",
 		},
 		keys = {
-			{ "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
-			{ "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
-			{ "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
-			{ "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
@@ -203,13 +188,11 @@ require("lazy").setup({
 						"github:mason-org/mason-registry",
 					},
 				},
-			}
-		}
+			},
+		},
 	},
 	-- last
-
 })
-
 
 require("mason").setup({
 	ensure_installed = {
@@ -220,7 +203,7 @@ require("mason").setup({
 		"prettier",
 		"curlylint",
 		"clang-format",
-	}
+	},
 })
 
 vim.g.lsp_zero_extend_lspconfig = 0
@@ -234,48 +217,40 @@ require("mason-lspconfig").setup({
 		"tsserver",
 		"clangd",
 		"bashls",
+		"cssls",
 		-- php
+		"intelephense",
 	},
 	handlers = {
-		--- this first function is the "default handler"
-		--- it applies to every language server without a "custom handler"
 		function(server_name)
-			require('lspconfig')[server_name].setup({})
-		end,
-
-		--- this is the "custom handler" for `example_server`
-		--- in your own config you should replace `example_server`
-		--- with the name of a language server you have installed
-		example_server = function()
-			--- in this function you can setup
-			--- the language server however you want.
-			--- in this example we just use lspconfig
-
-			require('lspconfig').example_server.setup({
-				---
-				-- in here you can add your own
-				-- custom configuration
-				---
-			})
+			require("lspconfig")[server_name].setup({})
 		end,
 	},
 })
 
+-- cmpSHIT
+-- require("completions")
+
 -- setup lsps
-require('java').setup()
-require('lspconfig').jdtls.setup({})
+require("java").setup()
+require("lspconfig").jdtls.setup({})
 --------------------------------------
-require("lspconfig").lua_ls.setup {}
+require("lspconfig").lua_ls.setup({})
 --------------------------------------
-require("lspconfig").rust_analyzer.setup {}
+require("lspconfig").rust_analyzer.setup({})
 --------------------------------------
-require("lspconfig").pyright.setup {}
+require("lspconfig").pyright.setup({})
 --------------------------------------
-require("lspconfig").tailwindcss.setup {}
-require("lspconfig").tsserver.setup {}
-require("lspconfig").cssls.setup {}
+require("lspconfig").tailwindcss.setup({})
+require("lspconfig").tsserver.setup({})
+require("lspconfig").cssls.setup({})
 --------------------------------------
-require("lspconfig").clangd.setup {}
+require("lspconfig").clangd.setup({})
+--------------------------------------
+-- php
+require("lspconfig").intelephense.setup({
+	root_dir = require("lspconfig").util.root_pattern(".git", "package.json"),
+})
 --------------------------------------
 -- additional plugins
 require("plugins.git")
@@ -292,32 +267,18 @@ require("plugins.oil")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require 'lspconfig'.cssls.setup {
+require("lspconfig").cssls.setup({
 	capabilities = capabilities,
-}
+})
 require("plugins.cmp_setup")
 
 -- bashls
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'sh',
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sh",
 	callback = function()
 		vim.lsp.start({
-			name = 'bash-language-server',
-			cmd = { 'bash-language-server', 'start' },
+			name = "bash-language-server",
+			cmd = { "bash-language-server", "start" },
 		})
 	end,
 })
-
-
--- lsp_zero.on_attach(function(client, bufnr)
--- 	lsp_zero.default_keymaps({ buffer = bufnr })
--- end)
---
--- lsp_zero.on_attach(function(client, bufnr)
--- 	-- see :help lsp-zero-keybindings
--- 	-- to learn the available actions
--- 	lsp_zero.default_keymaps({ buffer = bufnr })
--- end)
-
--- to learn how to use mason.nvim
--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md

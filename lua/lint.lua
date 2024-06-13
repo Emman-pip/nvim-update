@@ -22,6 +22,7 @@ require("conform").setup({
 		go = { "goimports", "gofmt" },
 		-- Use a sub-list to run only the first available formatter
 		javascript = { { "prettierd", "prettier" } },
+		-- php = { { "prettier", "prettierd" } },
 		-- You can use a function here to determine the formatters dynamically
 		-- css = {},
 		python = function(bufnr)
