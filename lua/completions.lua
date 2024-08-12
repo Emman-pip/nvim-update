@@ -26,6 +26,12 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 require("lspconfig").intelephense.setup({
 	capabilities = capabilities,
 	cmd = { "intelephense", "--stdio" },
-	filetypes = { "php" },
+	filetypes = { "php", "blade.php" },
+	root_dir = require("lspconfig").util.root_pattern("composer.json", ".git"),
+})
+require("lspconfig").stimulus_ls.setup({
+	capabilities = capabilities,
+	cmd = { "intelephense", "--stdio" },
+	filetypes = { "php", "blade.php" },
 	root_dir = require("lspconfig").util.root_pattern("composer.json", ".git"),
 })

@@ -191,6 +191,17 @@ require("lazy").setup({
 			},
 		},
 	},
+	{
+		"EmranMR/tree-sitter-blade",
+		-- config = function()
+		-- 	require("nvim-treesitter.configs").setup({
+		-- 		ensure_installed = "blade",
+		-- 		highlight = {
+		-- 			enable = true,
+		-- 		},
+		-- 	})
+		-- end,
+	},
 	-- last
 })
 
@@ -220,6 +231,7 @@ require("mason-lspconfig").setup({
 		"cssls",
 		-- php
 		"intelephense",
+		"stimulus_ls",
 	},
 	handlers = {
 		function(server_name)
@@ -282,3 +294,25 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
+
+-- blade
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.blade = {
+	install_info = {
+		url = "https://github.com/EmranMR/tree-sitter-blade",
+		files = { "src/parser.c" },
+		branch = "main",
+	},
+	filetype = "blade",
+}
+
+-- local group = vim.api.nvim_create_augroup("blade", { clear=true})
+-- vim.api.nvim_create_autocmd("BufRead", {
+-- 	group = group,
+-- 	pattern = "*.blade.php",
+--
+-- })
+--
+-- require("lspconfig").stimulus_ls.setup({
+-- 	root_dir = require("lspconfig").util.root_pattern(".git", "package.json"),
+-- })
